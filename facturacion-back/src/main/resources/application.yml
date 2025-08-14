@@ -1,0 +1,31 @@
+spring:
+  profiles:
+    active: mongo
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: oracle
+  datasource:
+    url: jdbc:oracle:thin:@//192.168.1.109:1521/xepdb1
+    username: nick
+    password: N1C0LASm
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.OracleDialect
+    hibernate:
+      ddl-auto: none
+  show-sql: true
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: mongo
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/facturacion_mongo
