@@ -434,8 +434,7 @@ public class FacturaService {
                 // Datos de la Factura
                 .codigoFacturacion(request.getCodigoFacturacion())
                 .tienda(request.getTienda())
-                .fechaFactura(request.getFecha() != null ? 
-                    request.getFecha().atStartOfDay() : LocalDateTime.now())
+                .fechaFactura(LocalDateTime.now())
                 .terminal(request.getTerminal())
                 .boleta(request.getBoleta())
                 .medioPago(request.getMedioPago())
@@ -497,8 +496,7 @@ public class FacturaService {
                 .receptor(receptor)
                 .codigoFacturacion(request.getCodigoFacturacion())
                 .tienda(request.getTienda())
-                .fechaFactura(request.getFecha() != null ? 
-                    request.getFecha().atStartOfDay() : LocalDateTime.now())
+                .fechaFactura(LocalDateTime.now())
                 .terminal(request.getTerminal())
                 .boleta(request.getBoleta())
                 .medioPago(request.getMedioPago())
@@ -656,5 +654,74 @@ public class FacturaService {
         datos.put("selloDigital", "Simulado para ambiente de pruebas");
         datos.put("certificado", "Simulado para ambiente de pruebas");
         return datos;
+    }
+
+    /**
+     * Consulta facturas por empresa/perfil con filtros opcionales
+     */
+    public Map<String, Object> consultarFacturasPorEmpresa(String rfcEmpresa, String tienda, String fechaInicio, String fechaFin) {
+        Map<String, Object> response = new HashMap<>();
+        
+        try {
+            // Por ahora, simulamos datos de facturas
+            // En implementación real, se consultaría la base de datos
+            Map<String, Object> factura1 = new HashMap<>();
+            factura1.put("uuid", "550e8400-e29b-41d4-a716-446655440001");
+            factura1.put("codigoFacturacion", "FAC-550e8400");
+            factura1.put("tienda", tienda != null ? tienda : "T001");
+            factura1.put("fechaFactura", "2024-01-15");
+            factura1.put("terminal", "TERM-001");
+            factura1.put("boleta", "BOL-550e8400");
+            factura1.put("razonSocial", "Empresa Ejemplo S.A. de C.V.");
+            factura1.put("rfc", rfcEmpresa != null ? rfcEmpresa : "EEJ920629TE3");
+            factura1.put("total", 1250.50);
+            factura1.put("estado", "TIMBRADA");
+            factura1.put("medioPago", "Efectivo");
+            factura1.put("formaPago", "Pago en una sola exhibición");
+
+            Map<String, Object> factura2 = new HashMap<>();
+            factura2.put("uuid", "550e8400-e29b-41d4-a716-446655440002");
+            factura2.put("codigoFacturacion", "FAC-550e8401");
+            factura2.put("tienda", tienda != null ? tienda : "T002");
+            factura2.put("fechaFactura", "2024-01-16");
+            factura2.put("terminal", "TERM-002");
+            factura2.put("boleta", "BOL-550e8401");
+            factura2.put("razonSocial", "Cliente General");
+            factura2.put("rfc", "XAXX010101000");
+            factura2.put("total", 3450.75);
+            factura2.put("estado", "TIMBRADA");
+            factura2.put("medioPago", "Tarjeta de crédito");
+            factura2.put("formaPago", "Pago en una sola exhibición");
+
+            Map<String, Object> factura3 = new HashMap<>();
+            factura3.put("uuid", "550e8400-e29b-41d4-a716-446655440003");
+            factura3.put("codigoFacturacion", "FAC-550e8402");
+            factura3.put("tienda", tienda != null ? tienda : "T003");
+            factura3.put("fechaFactura", "2024-01-17");
+            factura3.put("terminal", "TERM-003");
+            factura3.put("boleta", "BOL-550e8402");
+            factura3.put("razonSocial", "María Rodríguez");
+            factura3.put("rfc", "ROMA800101ABC");
+            factura3.put("total", 5678.90);
+            factura3.put("estado", "TIMBRADA");
+            factura3.put("medioPago", "Transferencia");
+            factura3.put("formaPago", "Pago en una sola exhibición");
+
+            java.util.List<Map<String, Object>> facturas = new java.util.ArrayList<>();
+            facturas.add(factura1);
+            facturas.add(factura2);
+            facturas.add(factura3);
+
+            response.put("exitoso", true);
+            response.put("mensaje", "Facturas consultadas exitosamente");
+            response.put("facturas", facturas);
+            response.put("totalFacturas", facturas.size());
+            
+        } catch (Exception e) {
+            response.put("exitoso", false);
+            response.put("error", "Error al consultar facturas: " + e.getMessage());
+        }
+        
+        return response;
     }
 } 

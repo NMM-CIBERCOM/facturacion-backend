@@ -1,6 +1,10 @@
 spring:
   profiles:
     active: mongo
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    date-format: yyyy-MM-dd'T'HH:mm:ss.SSS
 
 ---
 
@@ -19,6 +23,10 @@ spring:
     hibernate:
       ddl-auto: none
   show-sql: true
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    date-format: yyyy-MM-dd'T'HH:mm:ss.SSS
 
 ---
 
@@ -29,3 +37,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/facturacion_mongo
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    date-format: yyyy-MM-dd'T'HH:mm:ss.SSS

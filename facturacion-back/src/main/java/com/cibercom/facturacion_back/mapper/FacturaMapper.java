@@ -60,8 +60,7 @@ public class FacturaMapper {
                 .receptor(receptor)
                 .codigoFacturacion(request.getCodigoFacturacion())
                 .tienda(request.getTienda())
-                .fechaFactura(request.getFecha() != null ? 
-                    request.getFecha().atStartOfDay() : LocalDateTime.now())
+                .fechaFactura(LocalDateTime.now())
                 .terminal(request.getTerminal())
                 .boleta(request.getBoleta())
                 .medioPago(request.getMedioPago())
