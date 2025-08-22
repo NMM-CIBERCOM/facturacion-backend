@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: mongo
+    active: oracle
   jackson:
     serialization:
       write-dates-as-timestamps: false
